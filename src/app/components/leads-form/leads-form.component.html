@@ -1,0 +1,123 @@
+<form [formGroup]="leadForm">
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>CNPJ</mat-label>
+        <input mask="00.000.000/0000-00" matInput formControlName="cnpj" />
+        <mat-error *ngIf="leadForm.controls['cnpj'].hasError('required')">
+          O campo CNPJ é <strong>obrigatório</strong>
+        </mat-error>
+
+        <mat-error *ngIf="leadForm.controls['cnpj'].hasError('invalidCnpj')">
+          o CNPJ digitado é invalido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Razão Social</mat-label>
+        <input matInput formControlName="razaoSocial" />
+        <mat-error
+          *ngIf="leadForm.controls['razaoSocial'].hasError('required')"
+        >
+          O campo Razão Social é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>CEP</mat-label>
+        <input mask="00000-000" matInput formControlName="cep" />
+        <mat-error *ngIf="leadForm.controls['cep'].hasError('required')">
+          O campo CEP é <strong>obrigatório</strong>
+        </mat-error>
+
+        <mat-error *ngIf="leadForm.controls['cep'].hasError('invalidCep')">
+          O CEP digitado é inválido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <button
+        type="button"
+        mat-button
+        mat-stroked-button
+        (click)="searchForAddressByCep(leadForm.controls['cep'].value)"
+      >
+        Buscar CEP
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="endereco" />
+        <mat-error *ngIf="leadForm.controls['endereco'].hasError('required')">
+          O campo Endereço é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Número</mat-label>
+        <input inputmode="numeric" matInput formControlName="numero" />
+        <mat-error *ngIf="leadForm.controls['numero'].hasError('required')">
+          O campo Número é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="complemento" />
+        <mat-error
+          *ngIf="leadForm.controls['complemento'].hasError('required')"
+        >
+          O campo Complemento é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro" />
+        <mat-error *ngIf="leadForm.controls['bairro'].hasError('required')">
+          O campo Bairro é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="cidade" />
+        <mat-error *ngIf="leadForm.controls['cidade'].hasError('required')">
+          O campo Cidade é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="full-width">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="uf" />
+        <mat-error *ngIf="leadForm.controls['uf'].hasError('required')">
+          O campo Estado é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <button
+    [disabled]="!leadForm.valid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+  >
+    Salvar
+  </button>
+</form>
