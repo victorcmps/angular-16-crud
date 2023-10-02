@@ -114,7 +114,11 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Estado</mat-label>
-        <input required matInput formControlName="uf" />
+        <mat-select formControlName="uf" required>
+          <mat-option *ngFor="let state of states" [value]="state.acronym">
+            {{state.name}}
+          </mat-option>
+        </mat-select>
         <mat-error *ngIf="leadForm.controls['uf'].hasError('required')">
           O campo Estado é <strong>obrigatório</strong>
         </mat-error>
