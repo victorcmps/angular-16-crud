@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LeadModel } from 'src/app/models/lead-model';
 import { LeadService } from 'src/app/services/lead.service';
 import { DeleteLeadDialogComponent } from './delete-lead-dialog/delete-lead-dialog.component';
-import { Subscription } from 'rxjs';
+import { OperatorFunction, Subscription, filter } from 'rxjs';
 
 type LeadTableModel = Pick<LeadModel, 'cnpj' | 'razaoSocial' | 'cep' | 'uf'>;
 
@@ -22,6 +22,7 @@ export class LeadsComponent {
   ];
   public dataSource: LeadTableModel[] = [];
   public leads: LeadModel[] | null = null;
+  public loading: boolean = false;
   private subscriptions = new Subscription();
 
   public constructor(
@@ -44,12 +45,21 @@ export class LeadsComponent {
   };
 
   private readonly getLeads = () => {
+    this.loading = true;
     this.subscriptions.add(
-      this.leadService.getAllLeads().subscribe({
-        next: (apiResponse) => {
-          this.dataSource = apiResponse;
-        },
-      })
+      this.leadService
+        .getAllLeads()
+        .pipe(
+          filter(
+            (value: LeadModel[] | null): boolean => !!value
+          ) as OperatorFunction<LeadModel[] | null, LeadModel[]>
+        )
+        .subscribe({
+          next: (apiResponse) => {
+            this.loading = false;
+            this.dataSource = apiResponse;
+          },
+        })
     );
   };
 }

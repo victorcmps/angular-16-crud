@@ -1,2 +1,8 @@
-<h1>Adicionar Lead</h1>
-<app-leads-form (saveButtonClicked)="createLead($event)"></app-leads-form>
+<div *ngIf="loading" class="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-container *ngIf="!loading">
+  <h1>Adicionar Lead</h1>
+  <app-leads-form [saving]="saving" (saveButtonClicked)="createLead($event)"></app-leads-form>
+</ng-container>

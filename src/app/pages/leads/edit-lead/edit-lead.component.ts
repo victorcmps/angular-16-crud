@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { OperatorFunction, Subscription, filter } from 'rxjs';
 import { LeadModel } from 'src/app/models/lead-model';
 import { LeadService } from 'src/app/services/lead.service';
 
@@ -12,6 +12,8 @@ import { LeadService } from 'src/app/services/lead.service';
 })
 export class EditLeadComponent implements OnInit, OnDestroy {
   public lead: LeadModel | null = null;
+  public loading: boolean = false;
+  public saving: boolean = false;
   private readonly subscriptions = new Subscription();
   private readonly leadId = this.route.snapshot.paramMap.get('id') ?? null;
 
@@ -24,29 +26,44 @@ export class EditLeadComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     if (this.leadId) {
-      this.subscriptions.add(
-        this.leadService
-          .getLead(this.leadId)
-          .subscribe((apiResponse: LeadModel) => {
-            this.lead = apiResponse;
-          })
-      );
+      this.getLead(this.leadId);
     }
   }
 
   public readonly updateLead = (lead: LeadModel) => {
+    this.saving = true;
     if (this.leadId) {
       this.subscriptions.add(
-        this.leadService
-          .updateLead(lead, this.leadId)
-          .subscribe({ next: () => {
-            this.snackBar.open('Lead atualizado!', 'Dispensar', {
-              duration: 3000
-            });
-            this.router.navigate(['/leads']);
-          } })
+        this.leadService.updateLead(lead, this.leadId).subscribe({
+          next: (apiResponse) => {
+            this.saving = false;
+            if (apiResponse) {
+              this.snackBar.open('Lead atualizado!', 'Dispensar', {
+                duration: 3000,
+              });
+              this.router.navigate(['/leads']);
+            }
+          },
+        })
       );
     }
+  };
+
+  private readonly getLead = (leadId: string) => {
+    this.loading = true;
+    this.subscriptions.add(
+      this.leadService
+        .getLead(leadId)
+        .pipe(
+          filter(
+            (value: LeadModel | null): boolean => !!value
+          ) as OperatorFunction<LeadModel | null, LeadModel>
+        )
+        .subscribe((apiResponse: LeadModel) => {
+          this.loading = false;
+          this.lead = apiResponse;
+        })
+    );
   };
 
   public ngOnDestroy(): void {

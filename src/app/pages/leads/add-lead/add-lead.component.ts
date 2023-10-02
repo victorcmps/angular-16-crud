@@ -11,6 +11,8 @@ import { LeadService } from 'src/app/services/lead.service';
   styleUrls: ['./add-lead.component.scss'],
 })
 export class AddLeadComponent {
+  public loading: boolean = false;
+  public saving: boolean = false;
   private readonly subscriptions = new Subscription();
 
   constructor(
@@ -20,13 +22,17 @@ export class AddLeadComponent {
   ) {}
 
   public readonly createLead = (lead: LeadModel) => {
+    this.saving = true;
     this.subscriptions.add(
       this.leadService.createLead(lead).subscribe({
-        next: () => {
-          this.snackBar.open('Lead criado!', 'Dispensar', {
-            duration: 3000
-          });
-          this.router.navigate(['/leads']);
+        next: (apiResponse) => {
+          this.saving = false;
+          if (apiResponse) {
+            this.snackBar.open('Lead criado!', 'Dispensar', {
+              duration: 3000,
+            });
+            this.router.navigate(['/leads']);
+          }
         },
       })
     );

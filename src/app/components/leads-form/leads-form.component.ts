@@ -25,6 +25,7 @@ export class LeadsFormComponent implements OnInit {
   @Output() public saveButtonClicked = new EventEmitter();
   @Input() public formData: LeadModel | null = null;
   @Input() public saving: boolean = false;
+  public loadingCep: boolean = false;
 
   public leadForm = new FormGroup<LeadFormGroupModel>({
     cnpj: new FormControl<string>(
@@ -58,7 +59,9 @@ export class LeadsFormComponent implements OnInit {
 
   public readonly searchForAddressByCep = (cep: string | null): void => {
     if (cep) {
+      this.loadingCep = true;
       this.addressService.getAddressByCep(cep).subscribe((address) => {
+        this.loadingCep = false;
         if (!!!address.erro) {
           this.leadForm.patchValue({
             endereco: address.logradouro,

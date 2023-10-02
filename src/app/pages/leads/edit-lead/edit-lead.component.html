@@ -1,2 +1,14 @@
 <h1>Editar Leads</h1>
-<app-leads-form (saveButtonClicked)="updateLead($event)" *ngIf="lead" [formData]="lead"></app-leads-form>
+
+<div *ngIf="loading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-container *ngIf="!loading">
+  <app-leads-form
+    [saving]="saving"
+    (saveButtonClicked)="updateLead($event)"
+    *ngIf="lead"
+    [formData]="lead"
+  ></app-leads-form>
+</ng-container>

@@ -2,5 +2,17 @@
 <div mat-dialog-content>Tem certeza que deseja deletar esse lead?</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-flat-button mat-dialog-close cdkFocusInitial color="primary" (click)="deleteLead()">Sim</button>
+  <button
+    [disabled]="deleting"
+    mat-flat-button
+    mat-dialog-close
+    cdkFocusInitial
+    color="primary"
+    (click)="deleteLead()"
+  >
+    <mat-icon *ngIf="deleting">
+      <mat-spinner color="primary" diameter="18"></mat-spinner>
+    </mat-icon>
+    Sim
+  </button>
 </div>

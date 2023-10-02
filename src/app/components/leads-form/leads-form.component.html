@@ -3,7 +3,12 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>CNPJ</mat-label>
-        <input required mask="00.000.000/0000-00" matInput formControlName="cnpj" />
+        <input
+          required
+          mask="00.000.000/0000-00"
+          matInput
+          formControlName="cnpj"
+        />
         <mat-error *ngIf="leadForm.controls['cnpj'].hasError('required')">
           O campo CNPJ é <strong>obrigatório</strong>
         </mat-error>
@@ -47,6 +52,9 @@
         mat-stroked-button
         (click)="searchForAddressByCep(leadForm.controls['cep'].value)"
       >
+      <mat-icon *ngIf="loadingCep">
+        <mat-spinner color="primary" diameter="18"></mat-spinner>
+      </mat-icon>
         Buscar CEP
       </button>
     </div>
@@ -113,13 +121,19 @@
       </mat-form-field>
     </div>
   </div>
+  <button mat-button routerLink="/leads">
+    Voltar
+  </button>
   <button
-    [disabled]="saving || (!leadForm.valid || !leadForm.dirty)"
+    [disabled]="saving || !leadForm.valid || !leadForm.dirty"
     mat-raised-button
     color="primary"
     type="submit"
     (click)="saveButtonClicked.emit(leadForm.value)"
   >
+    <mat-icon *ngIf="saving">
+      <mat-spinner color="primary" diameter="18"></mat-spinner>
+    </mat-icon>
     Salvar
   </button>
 </form>

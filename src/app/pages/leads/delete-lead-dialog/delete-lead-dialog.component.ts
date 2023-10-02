@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,8 @@ import { LeadService } from 'src/app/services/lead.service';
   templateUrl: './delete-lead-dialog.component.html',
   styleUrls: ['./delete-lead-dialog.component.scss'],
 })
-export class DeleteLeadDialogComponent {
+export class DeleteLeadDialogComponent implements OnDestroy {
+  public deleting: boolean = false;
   private readonly subscriptions = new Subscription();
 
   public constructor(
@@ -20,9 +21,11 @@ export class DeleteLeadDialogComponent {
   ) {}
 
   public readonly deleteLead = () => {
+    this.deleting = true;
     this.subscriptions.add(
       this.leadService.deleteLead(this.data.id).subscribe({
         next: () => {
+          this.deleting = false;
           this.dialogRef.close();
           this.snackBar.open('Lead excluido!', 'Dispensar', {
             duration: 3000,
@@ -31,4 +34,8 @@ export class DeleteLeadDialogComponent {
       })
     );
   };
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }
