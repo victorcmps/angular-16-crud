@@ -12,7 +12,7 @@ Após isso, execute `ng serve` para rodar o servidor de desenvolvimento. Navegue
 
 ## Code scaffolding
 
-Execute `ng generate component nome-do-componente` para gerar um novo componente. Você também pode usar `ng generate directiva|pipe|service|class|guard|interface|enum|module`.
+Execute `ng generate component nome-do-componente` para gerar um novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
