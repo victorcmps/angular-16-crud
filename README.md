@@ -1,4 +1,5 @@
-🇧🇷 PT-BR
+**#🇧🇷 PT-BR**
+
 # CadastroLeads
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.2.3.
@@ -26,7 +27,8 @@ Execute `ng test` para executar os testes unitários via [Karma](https://karma-r
 Para obter mais ajuda sobre o Angular CLI, use `ng help` ou confira a página [Visão geral do Angular CLI e referência de comandos](https://angular.io/cli).
 
 
-🇺🇸 EN-US
+**#🇺🇸 EN-US**
+
 # CadastroLeads
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
