@@ -10,28 +10,38 @@ import { LeadService } from 'src/app/services/lead.service';
   styleUrls: ['./edit-lead.component.scss'],
 })
 export class EditLeadComponent implements OnInit, OnDestroy {
-  private subscriptions = new Subscription();
   public lead: LeadModel | null = null;
+  private readonly subscriptions = new Subscription();
+  private readonly leadId = this.route.snapshot.paramMap.get('id') ?? null;
 
-  constructor(
+  public constructor(
     public readonly leadService: LeadService,
     private readonly route: ActivatedRoute
-  ) {
-  
-  }
+  ) {}
 
-  ngOnInit(): void {
-    const leadId = this.route.snapshot.paramMap.get('id') ?? null;
-    if (leadId) {
+  public ngOnInit(): void {
+    if (this.leadId) {
       this.subscriptions.add(
-        this.leadService.getLead(leadId).subscribe((apiResponse: LeadModel) => {
-          this.lead = apiResponse;
-        })
+        this.leadService
+          .getLead(this.leadId)
+          .subscribe((apiResponse: LeadModel) => {
+            this.lead = apiResponse;
+          })
       );
     }
   }
 
-  ngOnDestroy(): void {
+  public readonly updateLead = (lead: LeadModel) => {
+    if (this.leadId) {
+      this.subscriptions.add(
+        this.leadService
+          .updateLead(lead, this.leadId)
+          .subscribe({ next: () => {} })
+      );
+    }
+  };
+
+  public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 }

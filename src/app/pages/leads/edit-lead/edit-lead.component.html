@@ -1,1 +1,2 @@
-<app-leads-form *ngIf="lead" [formData]="lead"></app-leads-form>
+<h1>Editar Leads</h1>
+<app-leads-form (saveButtonClicked)="updateLead($event)" *ngIf="lead" [formData]="lead"></app-leads-form>

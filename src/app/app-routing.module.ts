@@ -7,6 +7,11 @@ import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'leads',
+    pathMatch: 'full'
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
@@ -29,3 +34,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
