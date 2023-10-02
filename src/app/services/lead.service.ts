@@ -9,6 +9,10 @@ import { LeadModel } from '../models/lead-model';
 export class LeadService {
   constructor(private http: HttpClient) {}
 
+  public createLead = (lead: LeadModel): Observable<LeadModel> => {
+    return this.http.post<LeadModel>(`leads`, lead);
+  };
+
   public getAllLeads = (): Observable<LeadModel[]> => {
     return this.http.get<LeadModel[]>(`leads`);
   };
@@ -17,8 +21,8 @@ export class LeadService {
     return this.http.get<LeadModel>(`leads/${id}`);
   };
 
-  public updateLead = (lead: LeadModel): Observable<LeadModel> => {
-    return this.http.put<LeadModel>(`leads`, lead);
+  public updateLead = (lead: LeadModel, id: string): Observable<LeadModel> => {
+    return this.http.put<LeadModel>(`leads/${id}`, lead);
   };
 
   public deleteLead = (id: string): Observable<null> => {

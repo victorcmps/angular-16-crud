@@ -1,0 +1,20 @@
+.table-actions {
+  button:not(:last-child) {
+    margin-right: 16px;
+  }
+}
+
+.mat-mdc-table {
+  background-color: none;
+  box-shadow: none;
+}
+
+.leads-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  &__title {
+    margin: 0;
+  }
+}
