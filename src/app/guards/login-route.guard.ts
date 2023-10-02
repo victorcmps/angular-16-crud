@@ -12,6 +12,6 @@ export default class LoginRouteGuard {
       this.router.navigate(['/login']);
     }
 
-    return !!window.localStorage.getItem('authToken');
+    return isUserLogged;
   }
 }
