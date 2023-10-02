@@ -1,8 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
 import { LeadModel } from 'src/app/models/lead-model';
 import { AddressService } from 'src/app/services/address.service';
+
+interface LeadFormGroupModel {
+  readonly cnpj: FormControl<string | null>;
+  readonly razaoSocial: FormControl<string | null>;
+  readonly cep: FormControl<string | null>;
+  readonly endereco: FormControl<string | null>;
+  readonly numero: FormControl<string | null>;
+  readonly complemento: FormControl<string | null>;
+  readonly bairro: FormControl<string | null>;
+  readonly cidade: FormControl<string | null>;
+  readonly uf: FormControl<string | null>;
+}
 
 @Component({
   selector: 'app-leads-form',
@@ -10,34 +22,33 @@ import { AddressService } from 'src/app/services/address.service';
   styleUrls: ['./leads-form.component.scss'],
 })
 export class LeadsFormComponent implements OnInit {
+  @Output() public saveButtonClicked = new EventEmitter();
   @Input() public formData: LeadModel | null = null;
+  @Input() public saving: boolean = false;
 
-  public leadForm = this.formBuilder.group({
-    cnpj: [
+  public leadForm = new FormGroup<LeadFormGroupModel>({
+    cnpj: new FormControl<string>(
       '',
       Validators.compose([
-        Validators.maxLength(14),
         Validators.required,
+        Validators.maxLength(14),
         CustomValidators.validateCNPJ,
-      ]),
-    ],
-    razaoSocial: ['', Validators.required],
-    cep: [
+      ])
+    ),
+    razaoSocial: new FormControl<string>('', [Validators.required]),
+    cep: new FormControl<string>(
       '',
-      Validators.compose([Validators.maxLength(8), Validators.required]),
-    ],
-    endereco: ['', Validators.required],
-    numero: ['', Validators.required],
-    complemento: [''],
-    bairro: ['', Validators.required],
-    cidade: ['', Validators.required],
-    uf: ['', Validators.required],
+      Validators.compose([Validators.maxLength(8), Validators.required])
+    ),
+    endereco: new FormControl<string>('', [Validators.required]),
+    numero: new FormControl<string>('', [Validators.required]),
+    complemento: new FormControl<string>(''),
+    bairro: new FormControl<string>('', [Validators.required]),
+    cidade: new FormControl<string>('', [Validators.required]),
+    uf: new FormControl<string>('', [Validators.required]),
   });
 
-  public constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly addressService: AddressService
-  ) {}
+  public constructor(private readonly addressService: AddressService) {}
 
   public ngOnInit(): void {
     if (this.formData) {

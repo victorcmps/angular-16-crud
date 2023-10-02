@@ -3,7 +3,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>CNPJ</mat-label>
-        <input mask="00.000.000/0000-00" matInput formControlName="cnpj" />
+        <input required mask="00.000.000/0000-00" matInput formControlName="cnpj" />
         <mat-error *ngIf="leadForm.controls['cnpj'].hasError('required')">
           O campo CNPJ é <strong>obrigatório</strong>
         </mat-error>
@@ -16,7 +16,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Razão Social</mat-label>
-        <input matInput formControlName="razaoSocial" />
+        <input required matInput formControlName="razaoSocial" />
         <mat-error
           *ngIf="leadForm.controls['razaoSocial'].hasError('required')"
         >
@@ -29,7 +29,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>CEP</mat-label>
-        <input mask="00000-000" matInput formControlName="cep" />
+        <input required mask="00000-000" matInput formControlName="cep" />
         <mat-error *ngIf="leadForm.controls['cep'].hasError('required')">
           O campo CEP é <strong>obrigatório</strong>
         </mat-error>
@@ -54,7 +54,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Endereço</mat-label>
-        <input matInput formControlName="endereco" />
+        <input required matInput formControlName="endereco" />
         <mat-error *ngIf="leadForm.controls['endereco'].hasError('required')">
           O campo Endereço é <strong>obrigatório</strong>
         </mat-error>
@@ -63,7 +63,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Número</mat-label>
-        <input inputmode="numeric" matInput formControlName="numero" />
+        <input required inputmode="numeric" matInput formControlName="numero" />
         <mat-error *ngIf="leadForm.controls['numero'].hasError('required')">
           O campo Número é <strong>obrigatório</strong>
         </mat-error>
@@ -85,7 +85,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Bairro</mat-label>
-        <input matInput formControlName="bairro" />
+        <input required matInput formControlName="bairro" />
         <mat-error *ngIf="leadForm.controls['bairro'].hasError('required')">
           O campo Bairro é <strong>obrigatório</strong>
         </mat-error>
@@ -96,7 +96,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Cidade</mat-label>
-        <input matInput formControlName="cidade" />
+        <input required matInput formControlName="cidade" />
         <mat-error *ngIf="leadForm.controls['cidade'].hasError('required')">
           O campo Cidade é <strong>obrigatório</strong>
         </mat-error>
@@ -105,7 +105,7 @@
     <div class="col">
       <mat-form-field class="full-width">
         <mat-label>Estado</mat-label>
-        <input matInput formControlName="uf" />
+        <input required matInput formControlName="uf" />
         <mat-error *ngIf="leadForm.controls['uf'].hasError('required')">
           O campo Estado é <strong>obrigatório</strong>
         </mat-error>
@@ -113,10 +113,11 @@
     </div>
   </div>
   <button
-    [disabled]="!leadForm.valid"
+    [disabled]="saving || (!leadForm.valid || !leadForm.dirty)"
     mat-raised-button
     color="primary"
     type="submit"
+    (click)="saveButtonClicked.emit(leadForm.value)"
   >
     Salvar
   </button>
