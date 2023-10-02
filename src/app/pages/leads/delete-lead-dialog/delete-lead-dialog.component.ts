@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { LeadService } from 'src/app/services/lead.service';
 
@@ -9,19 +10,25 @@ import { LeadService } from 'src/app/services/lead.service';
   styleUrls: ['./delete-lead-dialog.component.scss'],
 })
 export class DeleteLeadDialogComponent {
-  private subscriptions = new Subscription();
+  private readonly subscriptions = new Subscription();
 
   public constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
     private readonly dialogRef: MatDialogRef<DeleteLeadDialogComponent>,
+    private readonly snackBar: MatSnackBar,
     private readonly leadService: LeadService
   ) {}
 
   public readonly deleteLead = () => {
     this.subscriptions.add(
-      this.leadService
-        .deleteLead(this.data.id)
-        .subscribe({ next: () => this.dialogRef.close() })
+      this.leadService.deleteLead(this.data.id).subscribe({
+        next: () => {
+          this.dialogRef.close();
+          this.snackBar.open('Lead excluido!', 'Dispensar', {
+            duration: 3000,
+          });
+        },
+      })
     );
   };
 }

@@ -41,6 +41,7 @@
     </div>
     <div class="col">
       <button
+        [disabled]="!leadForm.controls['cep'].valid"
         type="button"
         mat-button
         mat-stroked-button

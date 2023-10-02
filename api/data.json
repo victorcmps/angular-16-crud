@@ -1,65 +1,64 @@
 {
-    "leads": [
-        {
-            "id": 1,
-            "cnpj": "06313468000112",
-            "razaoSocial": "Mega House Informática Ltda",
-            "cep": "04112011",
-            "endereco": "Avenida Lins de Vasconcelos",
-            "numero": "2543",
-            "complemento": "",
-            "bairro": "Vila Mariana",
-            "cidade": "São Paulo",
-            "uf": "SP"
-        },
-        {
-            "id": 2,
-            "cnpj": "06313468000112",
-            "razaoSocial": "Mega House Informática Ltda",
-            "cep": "04112011",
-            "endereco": "Avenida Lins de Vasconcelos",
-            "numero": "2543",
-            "complemento": "",
-            "bairro": "Vila Mariana",
-            "cidade": "São Paulo",
-            "uf": "SP"
-        },
-        {
-            "id": 3,
-            "cnpj": "06313468000112",
-            "razaoSocial": "Mega House Informática Ltda",
-            "cep": "04112011",
-            "endereco": "Avenida Lins de Vasconcelos",
-            "numero": "2543",
-            "complemento": "",
-            "bairro": "Vila Mariana",
-            "cidade": "São Paulo",
-            "uf": "SP"
-        },
-        {
-            "id": 4,
-            "cnpj": "06313468000112",
-            "razaoSocial": "Mega House Informática Ltda",
-            "cep": "04112011",
-            "endereco": "Avenida Lins de Vasconcelos",
-            "numero": "2543",
-            "complemento": "",
-            "bairro": "Vila Mariana",
-            "cidade": "São Paulo",
-            "uf": "SP"
-        },
-        {
-            "id": 5,
-            "cnpj": "06313468000112",
-            "razaoSocial": "Mega House Informática Ltda",
-            "cep": "04112011",
-            "endereco": "Avenida Lins de Vasconcelos",
-            "numero": "2543",
-            "complemento": "",
-            "bairro": "Vila Mariana",
-            "cidade": "São Paulo",
-            "uf": "SP"
-        }
-    ]
-      
+  "leads": [
+    {
+      "cnpj": "06313468000112",
+      "razaoSocial": "Teste 1",
+      "cep": "01310200",
+      "endereco": "Avenida Paulista",
+      "numero": "1444",
+      "complemento": "",
+      "bairro": "Bela Vista",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "id": 1
+    },
+    {
+      "cnpj": "06313468000112",
+      "razaoSocial": "Teste 2",
+      "cep": "04660060",
+      "endereco": "Travessa Sedna",
+      "numero": "1222",
+      "complemento": "",
+      "bairro": "Campo Grande",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "id": 2
+    },
+    {
+      "cnpj": "06313468000112",
+      "razaoSocial": "Teste 3",
+      "cep": "04112011",
+      "endereco": "Avenida Lins de Vasconcelos",
+      "numero": "2543",
+      "complemento": "",
+      "bairro": "Vila Mariana",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "id": 3
+    },
+    {
+      "cnpj": "06313468000112",
+      "razaoSocial": "Teste 4",
+      "cep": "04112011",
+      "endereco": "Avenida Lins de Vasconcelos",
+      "numero": "2543",
+      "complemento": "",
+      "bairro": "Vila Mariana",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "cnpj": "06313468000112",
+      "razaoSocial": "Mega House Informática Ltda",
+      "cep": "04112011",
+      "endereco": "Avenida Lins de Vasconcelos",
+      "numero": "2543",
+      "complemento": "",
+      "bairro": "Vila Mariana",
+      "cidade": "São Paulo",
+      "uf": "SP"
+    }
+  ]
 }
