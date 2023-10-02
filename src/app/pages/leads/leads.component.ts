@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LeadModel } from 'src/app/models/lead-model';
 import { LeadService } from 'src/app/services/lead.service';
@@ -12,7 +12,7 @@ type LeadTableModel = Pick<LeadModel, 'cnpj' | 'razaoSocial' | 'cep' | 'uf'>;
   templateUrl: './leads.component.html',
   styleUrls: ['./leads.component.scss'],
 })
-export class LeadsComponent {
+export class LeadsComponent implements OnDestroy {
   public dataSource: LeadTableModel[] = [];
   public loading: boolean = false;
   public readonly displayedColumns: string[] = [
@@ -32,17 +32,27 @@ export class LeadsComponent {
   public ngOnInit(): void {
     this.getLeads();
   }
- 
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   public readonly deleteLead = (id: string): void => {
-    this.dialog
-      .open(DeleteLeadDialogComponent, {
-        width: '450px',
-        data: {
-          id,
-        },
-      })
-      .afterClosed()
-      .subscribe(this.getLeads);
+    this.subscriptions.add(
+      this.dialog
+        .open(DeleteLeadDialogComponent, {
+          width: '450px',
+          data: {
+            id,
+          },
+        })
+        .afterClosed()
+        .subscribe((result: boolean): void => {
+          if (result) {
+            this.getLeads();
+          }
+        })
+    );
   };
 
   private readonly getLeads = (): void => {

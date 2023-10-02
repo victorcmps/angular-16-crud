@@ -26,7 +26,7 @@ export class DeleteLeadDialogComponent implements OnDestroy {
       this.leadService.deleteLead(this.data.id).subscribe({
         next: () => {
           this.deleting = false;
-          this.dialogRef.close();
+          this.dialogRef.close(true);
           this.snackBar.open('Lead excluido!', 'Dispensar', {
             duration: 3000,
           });
