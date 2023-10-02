@@ -10,15 +10,23 @@ import { AddLeadComponent } from './pages/leads/add-lead/add-lead.component';
 import { EditLeadComponent } from './pages/leads/edit-lead/edit-lead.component';
 import { LeadsComponent } from './pages/leads/leads.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { EnvironmentHttpInterceptor } from './interceptors/environment-http.interceptor';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { DeleteLeadDialogComponent } from './pages/leads/delete-lead-dialog/delete-lead-dialog.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -28,6 +36,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     AddLeadComponent,
     EditLeadComponent,
     LeadsComponent,
+    DeleteLeadDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,14 +44,21 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     BrowserAnimationsModule,
     HttpClientModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
     MatSelectModule,
+    MatTableModule,
     MatRadioModule,
     MatCardModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    MatGridListModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [
     provideNgxMask(),
