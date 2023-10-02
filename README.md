@@ -10,6 +10,8 @@ Primeiro, execute `npm run server` para rodar o servidor que simula uma API cria
 
 Após isso, execute `ng serve` para rodar o servidor de desenvolvimento. Navegue até `http://localhost:4200/`. O aplicativo será recarregado automaticamente se você alterar algum dos arquivos de origem.
 
+Para se logar, basta usar qualquer string no campo `login` e `senha`. 
+
 ## Code scaffolding
 
 Execute `ng generate component nome-do-componente` para gerar um novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
@@ -38,6 +40,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 First, run `npm run server` to run the server that simulates an API created with jsonserver.
 
 After that, execute `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+To login, just use any string on the login/password fields.
 
 ## Code scaffolding
 
