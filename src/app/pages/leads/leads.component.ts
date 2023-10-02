@@ -13,26 +13,27 @@ type LeadTableModel = Pick<LeadModel, 'cnpj' | 'razaoSocial' | 'cep' | 'uf'>;
   styleUrls: ['./leads.component.scss'],
 })
 export class LeadsComponent {
-  public displayedColumns: string[] = [
+  public dataSource: LeadTableModel[] = [];
+  public loading: boolean = false;
+  public readonly displayedColumns: string[] = [
     'cnpj',
     'razaoSocial',
     'cep',
     'uf',
     'actions',
   ];
-  public dataSource: LeadTableModel[] = [];
-  public leads: LeadModel[] | null = null;
-  public loading: boolean = false;
-  private subscriptions = new Subscription();
+  private readonly subscriptions = new Subscription();
 
   public constructor(
     private readonly leadService: LeadService,
     private readonly dialog: MatDialog
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.getLeads();
   }
-
-  public readonly deleteLead = (id: string) => {
+ 
+  public readonly deleteLead = (id: string): void => {
     this.dialog
       .open(DeleteLeadDialogComponent, {
         width: '450px',
@@ -44,7 +45,7 @@ export class LeadsComponent {
       .subscribe(this.getLeads);
   };
 
-  private readonly getLeads = () => {
+  private readonly getLeads = (): void => {
     this.loading = true;
     this.subscriptions.add(
       this.leadService

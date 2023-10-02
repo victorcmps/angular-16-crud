@@ -14,7 +14,7 @@ export class DeleteLeadDialogComponent implements OnDestroy {
   private readonly subscriptions = new Subscription();
 
   public constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { id: string },
+    @Inject(MAT_DIALOG_DATA) public readonly data: { id: string },
     private readonly dialogRef: MatDialogRef<DeleteLeadDialogComponent>,
     private readonly snackBar: MatSnackBar,
     private readonly leadService: LeadService

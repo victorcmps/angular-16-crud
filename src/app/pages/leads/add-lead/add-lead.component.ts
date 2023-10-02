@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { LeadService } from 'src/app/services/lead.service';
   templateUrl: './add-lead.component.html',
   styleUrls: ['./add-lead.component.scss'],
 })
-export class AddLeadComponent {
+export class AddLeadComponent implements OnDestroy {
   public loading: boolean = false;
   public saving: boolean = false;
   private readonly subscriptions = new Subscription();
@@ -21,7 +21,7 @@ export class AddLeadComponent {
     private readonly router: Router
   ) {}
 
-  public readonly createLead = (lead: LeadModel) => {
+  public readonly createLead = (lead: LeadModel): void => {
     this.saving = true;
     this.subscriptions.add(
       this.leadService.createLead(lead).subscribe({
@@ -37,4 +37,8 @@ export class AddLeadComponent {
       })
     );
   };
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }

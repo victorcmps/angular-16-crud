@@ -27,7 +27,7 @@ export class LeadsFormComponent implements OnInit {
   @Input() public saving: boolean = false;
   public loadingCep: boolean = false;
 
-  public states = [
+  public readonly states = [
     { name: 'Acre', acronym: 'AC' },
     { name: 'Alagoas', acronym: 'AL' },
     { name: 'Amapá', acronym: 'AP' },

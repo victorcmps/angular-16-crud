@@ -30,7 +30,7 @@ export class EditLeadComponent implements OnInit, OnDestroy {
     }
   }
 
-  public readonly updateLead = (lead: LeadModel) => {
+  public readonly updateLead = (lead: LeadModel): void => {
     this.saving = true;
     if (this.leadId) {
       this.subscriptions.add(

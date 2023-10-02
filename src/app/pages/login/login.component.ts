@@ -16,12 +16,12 @@ export class LoginComponent {
 
   public constructor(private readonly router: Router) {} 
 
-  public loginForm = new FormGroup<loginFormGroupModel>({
+  public readonly loginForm = new FormGroup<loginFormGroupModel>({
     login: new FormControl<string>(''),
     password: new FormControl<string>('')
   });
 
-  public readonly onLogin = () => {
+  public readonly onLogin = (): void => {
     window.localStorage.setItem('authToken', 'logged');
     this.router.navigate(['/leads']);
   }

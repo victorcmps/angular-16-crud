@@ -22,9 +22,9 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private readonly router: Router) {}
+  public constructor(private readonly router: Router) {}
 
-  public readonly logout = () => {
+  public readonly logout = (): void => {
     window.localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
   };
