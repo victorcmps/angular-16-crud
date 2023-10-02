@@ -4,6 +4,7 @@ import { LeadsComponent } from './pages/leads/leads.component';
 import { EditLeadComponent } from './pages/leads/edit-lead/edit-lead.component';
 import { AddLeadComponent } from './pages/leads/add-lead/add-lead.component';
 import { LoginComponent } from './pages/login/login.component';
+import LoginRouteGuard from './guards/login-route.guard';
 
 const routes: Routes = [
   {
@@ -17,14 +18,17 @@ const routes: Routes = [
   },
   {
     path: 'leads',
+    canActivate: [LoginRouteGuard],
     component: LeadsComponent,
   },
   {
     path: 'leads/add',
+    canActivate: [LoginRouteGuard],
     component: AddLeadComponent,
   },
   {
     path: 'leads/:id',
+    canActivate: [LoginRouteGuard],
     component: EditLeadComponent,
   },
 ];
